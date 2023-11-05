@@ -1,6 +1,5 @@
 state.hpp
 state.cpp
-Rotate.cpp
 Rotate.o
 Game.exe
 .vscode/
