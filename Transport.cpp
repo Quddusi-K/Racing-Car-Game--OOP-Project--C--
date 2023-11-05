@@ -21,6 +21,9 @@ public:
     {
         window.draw(car);
     }
+    sf::Sprite& giveme(){
+        return car;
+    }
 };
 
 // -240px -448px;
