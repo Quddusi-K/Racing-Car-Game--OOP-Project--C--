@@ -2,12 +2,16 @@
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
-
+#include <sstream>
+#include <string>
+#include "score.cpp"
 
 class Rotate
 {
 
 public:
+    // sf::Text text;
+    // sf::Font font;
     sf::Texture texture;
     sf::Sprite coin;
     float x;
@@ -15,8 +19,25 @@ public:
     sf::Sprite &car;
     sf::Clock collClk, frameClk;
     bool coll, flag;
+    Score* sc;
 
-    Rotate(sf::Sprite &, int, int);
+    // Rotate(sf::Sprite &, Score*,int, int);
+    Rotate(sf::Sprite &carpos, Score* s,int bound_=220,int y_=0) : sc(s),bound(bound_), y(y_), car(carpos), coll(false), flag(false), frame(0)
+{
+
+    texture.loadFromFile("PNG/goldcoin.png");
+    coin.setTexture(texture);
+    // coin.setTextureRect(sf::IntRect(46,93,131,134));
+    coin.setTextureRect(sf::IntRect(652, 92, 52, 136));
+    x = rand() % (bound + 140 - bound + 1) + bound; // width of road is 140
+
+    // set origin to middle
+    coin.setOrigin(sf::Vector2f(coin.getGlobalBounds().width / 2, coin.getGlobalBounds().height / 2));
+    coin.setScale(.3, .3);
+    coin.setPosition(sf::Vector2f(x, 0 - coin.getGlobalBounds().height-y));
+
+}
+
 
     void update()
     {
@@ -29,6 +50,8 @@ public:
             collClk.restart();
             coll = true;
             frame++;
+            sc->increment();
+            // text.setString(std::to_string(sc->score)); 
         }
         else if (collClk.getElapsedTime().asMilliseconds() > 250 && (coll))
         {
@@ -36,7 +59,11 @@ public:
             coll = false;
             coin.setTextureRect(sf::IntRect(652, 92, 52, 136));
             coin.setScale(.3, .3);
-            coin.move(0, -(coin.getGlobalBounds().getPosition().y + coin.getGlobalBounds().height));
+            int  extra=rand() % (300 - bound + 1) + 100;//to optimize later
+
+            // std::cout<<extra<<std::endl;
+
+            coin.move(0, -(coin.getGlobalBounds().getPosition().y + coin.getGlobalBounds().height+extra));
             coin.setPosition(rand() % (bound + 140 - bound + 1) + bound,coin.getGlobalBounds().getPosition().y);
             frame = 0;
         }
@@ -64,25 +91,11 @@ public:
     }
     void draw(sf::RenderWindow &win)
     {
+        // win.draw(text);
         if (!coll || (coll && collClk.getElapsedTime().asMilliseconds() < 320))
             win.draw(coin);
     }
 };
-
-Rotate::Rotate(sf::Sprite &carpos,int bound_=220,int y_=0) :bound(bound_), y(y_), car(carpos), coll(false), flag(false), frame(0)
-{
-
-    texture.loadFromFile("PNG/goldcoin.png");
-    coin.setTexture(texture);
-    // coin.setTextureRect(sf::IntRect(46,93,131,134));
-    coin.setTextureRect(sf::IntRect(652, 92, 52, 136));
-    x = rand() % (bound + 140 - bound + 1) + bound; // width of road is 140
-
-    // set origin to middle
-    coin.setOrigin(sf::Vector2f(coin.getGlobalBounds().width / 2, coin.getGlobalBounds().height / 2));
-    coin.setScale(.3, .3);
-    coin.setPosition(sf::Vector2f(x, 0 - coin.getGlobalBounds().height-y));
-}
 
 
 

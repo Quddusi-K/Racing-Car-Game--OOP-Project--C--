@@ -15,7 +15,7 @@ public:
     {
     }
 
-    virtual void handleEvents(sf::Event event) = 0;
+    virtual void handleEvents(sf::Event& event) = 0;
 
     void draw(sf::RenderWindow &window)
     {
@@ -39,7 +39,7 @@ public:
         car.setPosition(sf::Vector2f(xpos, ypos));
         car.setScale(sf::Vector2f(0.3, 0.3));
     }
-    void handleEvents(sf::Event event)
+    void handleEvents(sf::Event& event)
     {
         int code = event.key.scancode;
         switch (code)
@@ -61,15 +61,15 @@ public:
         case 22 :
             if (ypos > 20)
             {
-                ypos -= 2;
-                car.move(0,-2);
+                ypos -= 3;
+                car.move(0,-3);
             }
             break;
         case 18:
             if (ypos < 590)
             {
-                ypos += 2;
-                car.move(0,2);
+                ypos += 3;
+                car.move(0,3);
             }
             break;
         // case 3: xscale++; break;
@@ -96,7 +96,7 @@ public:
         car.setPosition(sf::Vector2f(xpos, ypos));
         car.setScale(sf::Vector2f(0.3, 0.3));
     }
-    void handleEvents(sf::Event event)
+    void handleEvents(sf::Event& event)
     {
         int code = event.key.scancode;
         sf::FloatRect a=car.getGlobalBounds();
@@ -120,15 +120,15 @@ public:
         case 89:
             if (ypos > 20)
             {
-                ypos -= 2;
-                car.move(0,-2);
+                ypos -= 3;
+                car.move(0,-3);
             }
             break;
         case 88:
             if (ypos < 590)
             {
-                ypos += 2;
-                car.move(0,2);
+                ypos += 3;
+                car.move(0,3);
             }
             break;
         // case 3: xscale++; break;

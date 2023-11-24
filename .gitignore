@@ -1,7 +1,8 @@
-state.hpp
-state.cpp
+# state.hpp
+# state.cpp
 Rotate.o
 Game.exe
+Game.o
 .vscode/
 testcodes/
 Road.o
