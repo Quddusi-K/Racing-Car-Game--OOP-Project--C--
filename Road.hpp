@@ -15,9 +15,9 @@ private:
     bool flag;
 
 public:
-    Road();
+    Road(int);
 
-    void update();
+    void update(); 
 
     // void handleEvent(sf::Event event);
 

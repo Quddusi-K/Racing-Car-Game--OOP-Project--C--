@@ -6,6 +6,7 @@
 #include <string>
 #include "score.cpp"
 
+
 class Rotate
 {
 
@@ -20,6 +21,7 @@ public:
     sf::Clock collClk, frameClk;
     bool coll, flag;
     Score* sc;
+    SoundCoins soundcoin;
 
     // Rotate(sf::Sprite &, Score*,int, int);
     Rotate(sf::Sprite &carpos, Score* s,int bound_=220,int y_=0) : sc(s),bound(bound_), y(y_), car(carpos), coll(false), flag(false), frame(0)
@@ -45,6 +47,7 @@ public:
         if (car.getGlobalBounds().intersects(coin.getGlobalBounds()) & (!coll))
         {
             // std::cout<<"COLLISION---------";
+            soundcoin.playSound();
             coin.scale(1.2, 1.2);
             // if(!coll)
             collClk.restart();
