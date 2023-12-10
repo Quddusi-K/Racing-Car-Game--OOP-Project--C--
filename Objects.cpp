@@ -5,21 +5,27 @@
 class Objects
 {
 public:
-    sf::Texture texture,miniTexture,policeTexture;
+    sf::Texture texture,miniTexture,policeTexture,policeTexture2,policeTexture3,texture2,texture3;
     sf::Sprite car;
     float x;
-    int  y, bound, frame;
+    int  y, bound, frame,ob;
     sf::Sprite &playerCar;
+    sf::Clock frameClk;
     
 
 
     // Rotate(sf::Sprite &, Score*,int, int);
-Objects(sf::Sprite& car_,int bound_=220,int y_=0):playerCar(car_),bound(bound_), y(y_)
+Objects(sf::Sprite& car_,int bound_=220,int y_=0):playerCar(car_),bound(bound_), y(y_),ob(1)
 {   
     
-    texture.loadFromFile("PNG/Ambulance.png");
+    texture.loadFromFile("PNG/ambulance_animation/1.png");
+    texture2.loadFromFile("PNG/ambulance_animation/2.png");
+    texture3.loadFromFile("PNG/ambulance_animation/3.png");
+
     miniTexture.loadFromFile("PNG/Mini_truck.png");
-    policeTexture.loadFromFile("PNG/Police.png");
+    policeTexture.loadFromFile("PNG/Police_animation/1.png");
+    policeTexture2.loadFromFile("PNG/Police_animation/2.png");
+    policeTexture3.loadFromFile("PNG/Police_animation/3.png");
     
     car.setTexture(texture);
     // 81px -18px;
@@ -55,7 +61,7 @@ bool update()
 
         if (car.getGlobalBounds().top >= 600)
         {   
-            int ob=rand()%3;
+            ob=rand()%3;
             if (ob==0){
                 car.setTexture(miniTexture);}
 
@@ -70,6 +76,38 @@ bool update()
             car.setPosition(rand() % (bound + 140 - bound + 1) + bound,car.getGlobalBounds().getPosition().y);
             return false;
         }
+
+        if(ob==1){
+            if (frameClk.getElapsedTime().asMilliseconds()>750)
+            {
+                car.setTexture(texture);
+                frameClk.restart();
+            }
+            else if (frameClk.getElapsedTime().asMilliseconds()>500)
+            {
+                car.setTexture(texture3);
+            }
+            else if(frameClk.getElapsedTime().asMilliseconds()>250){
+                car.setTexture(texture2);
+            }   
+        }
+
+        else if(ob==2){
+            if (frameClk.getElapsedTime().asMilliseconds()>750)
+            {
+                car.setTexture(policeTexture);
+                frameClk.restart();
+            }
+            else if (frameClk.getElapsedTime().asMilliseconds()>500)
+            {
+                car.setTexture(policeTexture3);
+            }
+            else if(frameClk.getElapsedTime().asMilliseconds()>250){
+                car.setTexture(policeTexture2);
+            }
+            
+        }
+
         return false;
     }
 
