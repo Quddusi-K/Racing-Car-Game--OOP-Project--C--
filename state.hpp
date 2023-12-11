@@ -42,7 +42,7 @@ class StateA: public State{
     sf::Clock countDown;
     sf::Text timeText ;sf::Font font;
     PlaySound ps;
-    int winner;
+    int winner,mapChoice;
 
     
     StateA(int);

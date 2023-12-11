@@ -22,6 +22,7 @@ int globalChoice=0;
     StateA::StateA(int choice=0):winner(3)
     {
         // bg=new Background(choice);
+        mapChoice=choice;
         if (choice==1)
         {
             bg.changeMap("PNG/BackD.jpg", sf::IntRect(0, 0, 800, 600));
@@ -47,8 +48,8 @@ int globalChoice=0;
         leftCoin= new Rotate(c1.giveme(),s1, 220, 200);
         rightCoin= new Rotate(c2.giveme(), s2,440, 200);
 
-        Amb1=new Objects(c1.giveme(),220);
-        Amb2=new Objects(c2.giveme(),440);
+        Amb1=new Objects(&c1,c1.giveme(),220);
+        Amb2=new Objects(&c2,c2.giveme(),440);
         font.loadFromFile("font/press2p.ttf");
         timeText.setFont(font);
         timeText.setCharacterSize(18);
@@ -106,9 +107,12 @@ int globalChoice=0;
     void StateA::draw(){
         
             bg.draw(game->window);
-
+            if (mapChoice==0)
+            {
             road1->draw(game->window);
             road2->draw(game->window);
+            }
+            
 
             c1.draw(game->window);
             c2.draw(game->window);

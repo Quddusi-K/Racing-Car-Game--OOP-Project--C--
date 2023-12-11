@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cstdlib>
+// #include "Transport.cpp"
 
 class Objects
 {
@@ -11,11 +12,12 @@ public:
     int  y, bound, frame,ob;
     sf::Sprite &playerCar;
     sf::Clock frameClk;
+    Transport *vehicle;
     
 
 
     // Rotate(sf::Sprite &, Score*,int, int);
-Objects(sf::Sprite& car_,int bound_=220,int y_=0):playerCar(car_),bound(bound_), y(y_),ob(1)
+Objects(Transport* t_, sf::Sprite& car_,int bound_=220,int y_=0):playerCar(car_),bound(bound_), y(y_),ob(1),vehicle(t_)
 {   
     
     texture.loadFromFile("PNG/ambulance_animation/1.png");
@@ -51,8 +53,11 @@ bool update()
             // std::cout<<"Collided";
             
             // background.changeBackground();
-            // game->state->bg.changeBackground("E:\\Gameover.png", sf::IntRect(0, 0, 600, 600));
-            return true;
+            // vehicle->life--;
+            vehicle->decreaseLife();
+            // std::cout<<vehicle->life;
+            if(vehicle->life==0){
+            return true;}
         } 
         // std::cout<<car.getGlobalBounds()<<"\n";
         // std::cout<<car.getGlobalBounds()<<"\n";

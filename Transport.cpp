@@ -7,19 +7,44 @@ class Transport
 {
 protected:
     float xpos, ypos;
-    sf::Texture carSheet;
-    sf::Sprite car;
+    sf::Texture carSheet,heartTexture,h2,h1;
+    sf::Sprite car,heart;
+    sf::Clock lifeClk;
 
 public:
-    Transport(float x, float y) : xpos(x), ypos(y)
+    int life;
+    Transport(float x, float y,int heartx) : xpos(x), ypos(y),life(3)
     {
+        heartTexture.loadFromFile("PNG/heart.png",sf::IntRect(7,10,304,85));
+        h2.loadFromFile("PNG/heart.png",sf::IntRect(7,10,200,85));
+        h1.loadFromFile("PNG/heart.png",sf::IntRect(7,10,95,85));
+        heart.setTexture(heartTexture);
+        heart.setScale(.3,.3);
+        heart.setPosition(heartx,50);
     }
 
     virtual void handleEvents() = 0;
-
+    void decreaseLife(){
+        if(lifeClk.getElapsedTime().asSeconds()>1){
+            lifeClk.restart();
+            life--;
+        }
+    }
     void draw(sf::RenderWindow &window)
-    {
+    {   
+        if (life==2)
+        {
+            // heart.setTextureRect(sf::IntRect(7,9,200,85));
+            heart.setTexture(h2);
+        }else if (life==1)
+        {
+            heart.setTexture(h1);
+            // heart.setTextureRect(sf::IntRect(7,9,94,85));
+        }
+        
+        
         window.draw(car);
+        window.draw(heart);
     }
     sf::Sprite& giveme(){
         return car;
@@ -32,7 +57,7 @@ public:
 class car1 : public Transport
 {
 public:
-    car1(float x = 220, float y = 580) : Transport(x, y)
+    car1(float x = 220, float y = 580) : Transport(x, y,10)
     {
         carSheet.loadFromFile("PNG/coll.png", sf::IntRect(240, 448, 108, 202));
         // carSheet.loadFromFile("PNG/Audi.png");
@@ -40,6 +65,7 @@ public:
         car.setTexture(carSheet);
         car.setPosition(sf::Vector2f(xpos, ypos));
         car.setScale(sf::Vector2f(0.3, 0.3));
+        
     }
     void handleEvents()
     {
@@ -85,7 +111,7 @@ public:
 class car2 : public Transport
 {
 public:
-    car2(float x = 450, float y = 580) : Transport(x, y)
+    car2(float x = 450, float y = 580) : Transport(x, y,695)
     {
         carSheet.loadFromFile("PNG/coll.png", sf::IntRect(0, 448, 108, 202));
         car.setTexture(carSheet);
