@@ -52,11 +52,13 @@ int globalChoice=0;
         Amb2=new Objects(&c2,c2.giveme(),440);
         font.loadFromFile("font/press2p.ttf");
         timeText.setFont(font);
-        timeText.setCharacterSize(18);
-        timeText.setFillColor(sf::Color::White);
-        timeText.setPosition(375,30);
+        timeText.setCharacterSize(20);
+        timeText.setFillColor(sf::Color::Black);
+        timeText.setOutlineColor(sf::Color::White);
+        timeText.setOutlineThickness(3);
+        timeText.setPosition(380,30);
+        // timeText.setScale(1.2,1.2);
         ps.playSound();
-        // timeText.setScale(0.7,0.7);
     
      
     } 
