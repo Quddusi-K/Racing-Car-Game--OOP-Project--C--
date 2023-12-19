@@ -9,7 +9,7 @@ class Road
 private:
     static int count;
     sf::Texture texture, midsheet, background;
-    sf::Sprite leftRoad, leftRoad1, rightRoad0, rightRoad1, desert, desertup;
+    sf::Sprite leftRoad, leftRoad1;
     float xroad, yroad;
     // float xscale, yscale;
     bool flag;

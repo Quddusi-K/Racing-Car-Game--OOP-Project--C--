@@ -25,7 +25,7 @@ public:
 
     virtual void handleEvents() = 0;
     void decreaseLife(){
-        if(lifeClk.getElapsedTime().asSeconds()>1){
+        if(lifeClk.getElapsedTime().asMilliseconds()>600){
             lifeClk.restart();
             life--;
         }
@@ -104,7 +104,7 @@ public:
                 car.move(0,3);
             }
         }
-        // car.setPosition(sf::Vector2f(xpos, ypos));
+        
     }
 };
 

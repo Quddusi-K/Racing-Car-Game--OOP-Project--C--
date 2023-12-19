@@ -9,8 +9,8 @@ StateA::~StateA(){
     delete s2;
     delete road1;
     delete road2;
-    delete r;
-    delete rr;
+    delete rightCoin2;
+    delete leftCoin2;
     delete leftCoin;
     delete rightCoin;
     delete Amb1;
@@ -44,8 +44,8 @@ int globalChoice=0;
         road1=new Road(220);
         road2=new Road(440);
 
-        r = new Rotate(c1.giveme(),s1);
-        rr=new Rotate(c2.giveme(),s2,440);
+        leftCoin2 = new Rotate(c1.giveme(),s1);
+        rightCoin2=new Rotate(c2.giveme(),s2,440);
 
         leftCoin= new Rotate(c1.giveme(),s1, 220, 200);
         rightCoin= new Rotate(c2.giveme(), s2,440, 200);
@@ -83,8 +83,8 @@ int globalChoice=0;
         //Coins Animation
         road1->update();
         road2->update();
-        r->update();
-        rr->update();
+        leftCoin2->update();
+        rightCoin2->update();
         leftCoin->update();
         rightCoin->update();
         s1->update();
@@ -127,8 +127,8 @@ int globalChoice=0;
             c1.draw(game->window);
             c2.draw(game->window);
 
-            r->draw(game->window);
-            rr->draw(game->window);
+            leftCoin2->draw(game->window);
+            rightCoin2->draw(game->window);
             leftCoin->draw(game->window);
             rightCoin->draw(game->window);
 
@@ -147,7 +147,6 @@ int globalChoice=0;
 
 
     void StateA::ChangeState(sf::Event& event){
-        // cout<<"yess";
         if(Amb1->update()||Pol1->update())
         {  
             winner=2; 
@@ -167,7 +166,6 @@ int globalChoice=0;
 
     State0::State0()
     {
-    // bg=new Background();
     bg.changeBackground("PNG/StartScreen.jpg", sf::IntRect(0, 0, 600, 450)); // Adjust the rect accordingly
     texturee.loadFromFile("PNG/play.png", sf::IntRect(117, 93, 424, 190));
     spritee.setOrigin(sf::Vector2f(spritee.getGlobalBounds().width / 2, spritee.getGlobalBounds().height / 2));
@@ -239,10 +237,6 @@ int globalChoice=0;
             event.mouseButton.x <= textBounds.left + textBounds.width &&
             event.mouseButton.y >= textBounds.top &&
             event.mouseButton.y <= textBounds.top + textBounds.height) {
-            // Perform your logic here
-            std::cout << "the state0 text!" << std::endl;
-
-            // Example: Change the game state to StateA
             Sg.Music.stop();
             this->game->setGameState(new StateA(bgChoice));
         }
@@ -324,10 +318,6 @@ int globalChoice=0;
             event.mouseButton.x <= 480 &&
             event.mouseButton.y >= 490 &&
             event.mouseButton.y <= 520) {
-            // Perform your logic here
-            std::cout << "Mouse clicked on the tt!" << std::endl;
-
-            // Example: Change the game state to StateA
             Eg.Music.stop();
             this->game->setGameState(new State0());
         }
@@ -341,12 +331,9 @@ int globalChoice=0;
             event.mouseButton.y >= 530 &&
             event.mouseButton.y <= 555) 
             {
-            // Perform your logic here
-            std::cout << "Mouse clicked on the tex!" << std::endl;
             Eg.Music.stop();
             this->game->window.close();
 
-            // Example: Change the game state to StateA
            
         }
         sf::FloatRect textBounds = text.getGlobalBounds();

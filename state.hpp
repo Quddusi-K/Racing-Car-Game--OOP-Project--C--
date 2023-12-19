@@ -30,13 +30,13 @@ class State{
     void virtual ChangeState(sf::Event& event)=0;
     void virtual handleCarEvents(){};
 
-};
+}; 
 
 class StateA: public State{
     public:
     Objects *Amb1,*Amb2,*Pol1,*Pol2;
     Road *road1, *road2; 
-    Rotate*r,*rr,*leftCoin,*rightCoin;
+    Rotate*leftCoin2,*rightCoin2,*leftCoin,*rightCoin;
     car1 c1;
     car2 c2;
     sf::Clock countDown;
