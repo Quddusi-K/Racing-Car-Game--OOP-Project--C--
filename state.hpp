@@ -34,7 +34,7 @@ class State{
 
 class StateA: public State{
     public:
-    Objects *Amb1,*Amb2;
+    Objects *Amb1,*Amb2,*Pol1,*Pol2;
     Road *road1, *road2; 
     Rotate*r,*rr,*leftCoin,*rightCoin;
     car1 c1;

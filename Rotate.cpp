@@ -53,7 +53,8 @@ public:
             collClk.restart();
             coll = true;
             frame++;
-            sc->increment();
+            // sc->increment();
+            ++*sc;
             // text.setString(std::to_string(sc->score)); 
         }
         else if (collClk.getElapsedTime().asMilliseconds() > 250 && (coll))

@@ -15,6 +15,8 @@ StateA::~StateA(){
     delete rightCoin;
     delete Amb1;
     delete Amb2;
+    delete Pol1;
+    delete Pol2;
 
 }
 int globalChoice=0;
@@ -48,8 +50,12 @@ int globalChoice=0;
         leftCoin= new Rotate(c1.giveme(),s1, 220, 200);
         rightCoin= new Rotate(c2.giveme(), s2,440, 200);
 
-        Amb1=new Objects(&c1,c1.giveme(),220);
-        Amb2=new Objects(&c2,c2.giveme(),440);
+        Amb1=new Objects(&c1,c1.giveme(),225);
+        Pol1=new Objects(&c1,c1.giveme(),225,300);
+
+        Amb2=new Objects(&c2,c2.giveme(),445);
+        Pol2=new Objects(&c2,c2.giveme(),445,300);
+
         font.loadFromFile("font/press2p.ttf");
         timeText.setFont(font);
         timeText.setCharacterSize(20);
@@ -86,6 +92,8 @@ int globalChoice=0;
         //Ambulance
         Amb1->update();
         Amb2->update();
+        Pol1->update();
+        Pol2->update();
 
         timeText.setString(std::to_string(static_cast<int>(countDown.getElapsedTime().asSeconds())));
 
@@ -129,6 +137,9 @@ int globalChoice=0;
 
             Amb1->draw(game->window);
             Amb2->draw(game->window);
+            Pol1->draw(game->window);
+            Pol2->draw(game->window);
+            
             
             game->window.draw(timeText);
     }
@@ -137,14 +148,14 @@ int globalChoice=0;
 
     void StateA::ChangeState(sf::Event& event){
         // cout<<"yess";
-        if(Amb1->update()==true )
+        if(Amb1->update()||Pol1->update())
         {  
             winner=2; 
             ps.Music.stop();
             this->game->setGameState(new StateB(winner));
             
 
-        }else if(Amb2->update()==true ){
+        }else if(Amb2->update()||Pol2->update()){
             winner=1;
             ps.Music.stop();
             this->game->setGameState(new StateB(winner));

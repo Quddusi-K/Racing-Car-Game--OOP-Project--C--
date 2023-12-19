@@ -38,10 +38,13 @@ Score::Score(int p) : score(0), player(p)
     text.setOutlineThickness(2);
 }
 
-void Score::increment()
-{
+// void Score::increment()
+// {
+//     ++score;
+//     // std::cout << "Player " << player << " score: " << score << " /n";
+// } 
+void Score::operator++(){
     ++score;
-    // std::cout << "Player " << player << " score: " << score << " /n";
 } 
 
 void Score::update()

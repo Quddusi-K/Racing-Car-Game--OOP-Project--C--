@@ -8,7 +8,8 @@ class Score{
     public:
     int score,player;
     Score(int);
-    void increment();
+    // void increment();
+    void operator++();
     void update();
     void draw(sf::RenderWindow &);
 };
